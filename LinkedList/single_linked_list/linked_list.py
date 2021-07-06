@@ -213,12 +213,30 @@ class LinkedList:
         cur_1.data , cur_2.data = cur_2.data, cur_1.data
         
         
-            
+    def remove_duplicate(self):
+        cur_node = self.head 
+        next_node = self.head.next 
+
+        check = {
+          
+        }
+
+        while cur_node:
+            if cur_node.data not in check:
+                check[cur_node.data]= cur_node.data
+            else:
+                print(f"Duplicate occur {cur_node.data}")
+
+            cur_node = cur_node.next 
+
+        print(check)
+                
 l = LinkedList()
 l.append("1")
 l.append("2")
 l.append("3")
-l.append("4")
+l.append("2")
+l.append("5")
 l.append("5")
 # l.append("6")
 # l.add_in_between("2","3")
@@ -226,9 +244,9 @@ l.append("5")
 
 l.print_list()
 
-print("Node Swap")
-l.node_swap("3","1")
-l.print_list()
+# print("Node Swap")
+# l.node_swap("3","1")
+# l.print_list()
     
 
 # only works if data is int 
@@ -243,6 +261,8 @@ l.print_list()
 # l.recursive_reverse(l.head)
 # print("reverse_list")
 # l.print_list()
+
+l.remove_duplicate()
 
 
 
