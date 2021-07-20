@@ -98,6 +98,46 @@ class Linkedlist {
     );
   }
 
+  // merge two list
+  merge_to_list(list2) {
+    var p = this.head;
+    var q = list2.head;
+    var s;
+    var new_node;
+
+    if (!p) return q;
+    if (!q) return p;
+
+    if (p && q) {
+      if (p.data <= q.data) {
+        s = p;
+        p = p.next;
+      } else {
+        s = q;
+        q = q.next;
+      }
+    }
+
+    new_node = s;
+
+    while (p && q) {
+      if (p.data <= q.data) {
+        s.next = p;
+        s = p;
+        p = p.next;
+      } else {
+        s.next = q;
+        s = q;
+        q = q.next;
+      }
+    }
+
+    if (!p) s.next = q;
+    if (!q) s.next = p;
+
+    // console.log(new_node);
+  }
+
   //   print the linked list
   print() {
     var cur_node = this.head;
@@ -108,15 +148,24 @@ class Linkedlist {
   }
 }
 
-var llist = new Linkedlist();
-llist.append("1");
-llist.append("2");
-llist.append("3");
-llist.append("4");
-llist.append("5");
-llist.append("6");
+var llist1 = new Linkedlist();
+llist1.append("1");
+llist1.append("3");
+llist1.append("5");
+llist1.append("7");
+llist1.append("9");
+llist1.append("10");
+
+var llist2 = new Linkedlist();
+llist2.append("2");
+llist2.append("4");
+llist2.append("6");
+llist2.append("8");
+
+llist1.merge_to_list(llist2);
+
 // llist.add_at_given("5", "4");
 // llist.delete_data("2");
-llist.print();
-llist.findMiddle();
-llist.sumAndLength();
+llist1.print();
+// llist1.findMiddle();
+// llist1.sumAndLength();
