@@ -1,4 +1,5 @@
 import math
+from typing import Dict
 
 
 class Node:
@@ -263,20 +264,23 @@ class LinkedList:
     def count_occurance(self, number):
         cur_node = self.head
 
+        count = dict()
         while cur_node:
-            if cur_node.data == number:
-                print("find")
-                # return "Find"
+            if cur_node.data not in count:
+                count[cur_node.data] = 1
             else:
-                print("not find")
+                count[cur_node.data] += 1
 
             cur_node = cur_node.next
+
+        print(count)
 
 
 l = LinkedList()
 l.append("A")
 l.append("B")
 l.append("C")
+l.append("A")
 l.append("D")
 # l.append("E")
 # l.append("F")
@@ -288,7 +292,7 @@ l.append("D")
 
 # l.nth_last_node_last(3)
 # l.nth_last_node_twoPointer(3)
-print(l.count_occurance("D"))
+print(l.count_occurance("A"))
 
 # l.print_list()
 
