@@ -138,6 +138,22 @@ class Linkedlist {
     // console.log(new_node);
   }
 
+  // reverse linked list
+  reverse() {
+    var cur_node = this.head;
+    var prev_node;
+    var next_node;
+
+    while (cur_node) {
+      next_node = cur_node.next;
+      cur_node.next = prev_node;
+
+      prev_node = cur_node;
+      cur_node = next_node;
+    }
+    this.head = prev_node;
+  }
+
   //   print the linked list
   print() {
     var cur_node = this.head;
@@ -166,6 +182,7 @@ llist2.append("8");
 
 // llist.add_at_given("5", "4");
 // llist.delete_data("2");
+llist1.reverse();
 llist1.print();
 // llist1.findMiddle();
 // llist1.sumAndLength();

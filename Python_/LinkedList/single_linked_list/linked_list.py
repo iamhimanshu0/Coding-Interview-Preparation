@@ -273,11 +273,15 @@ class LinkedList:
 
             cur_node = cur_node.next
 
-        print(count)
+        for k , v in count.items():
+            if k == number:
+                print(f"Occurance of {k} is {v} times")
 
 
 l = LinkedList()
 l.append("A")
+l.append("B")
+l.append("B")
 l.append("B")
 l.append("C")
 l.append("A")
@@ -292,7 +296,7 @@ l.append("D")
 
 # l.nth_last_node_last(3)
 # l.nth_last_node_twoPointer(3)
-print(l.count_occurance("A"))
+l.count_occurance("B")
 
 # l.print_list()
 
