@@ -162,7 +162,7 @@ llist2.append("4");
 llist2.append("6");
 llist2.append("8");
 
-llist1.merge_to_list(llist2);
+// llist1.merge_to_list(llist2);
 
 // llist.add_at_given("5", "4");
 // llist.delete_data("2");

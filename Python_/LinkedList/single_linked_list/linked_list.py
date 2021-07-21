@@ -55,8 +55,9 @@ class LinkedList:
         while cur_node:
             count += 1
             cur_node = cur_node.next
+            # print("Length of the LinkedList is:- ", count)
 
-        print("Length of the LinkedList is:- ", count)
+        return count
 
     # find_middle element of a LinkedList
 
@@ -203,6 +204,7 @@ class LinkedList:
 
         cur_1.data, cur_2.data = cur_2.data, cur_1.data
 
+    # remove duplicate
     def remove_duplicate(self):
         cur_node = self.head
         prev_node = None
@@ -222,17 +224,71 @@ class LinkedList:
 
             cur_node = prev_node.next
 
+    # N-th-to-last Node
+    def nth_last_node_last(self, pos):
+        cur_node = self.head
 
-# l = LinkedList()
-# l.append("1")
-# l.append("2")
-# l.append("4")
-# l.append("2")
-# l.append("2")
-# l.append("4")
+        l = self.length()
+        while cur_node:
+            if l == pos:
+                print(cur_node.data)
+                return
+                # return cur_node.data
+            l -= 1
+            cur_node = cur_node.next
+
+        # print(f"{pos} node for the last is {cur_node.data}")
+
+    # nth node from last (new method)
+    def nth_last_node_twoPointer(self, pos):
+        p = self.head
+        q = self.head
+
+        count = 0
+        while q and count < pos:
+            q = q.next
+            count += 1
+
+        if not q:
+            return "Sorry pos is greater then no of node in list"
+
+        while p and q:
+            p = p.next
+            q = q.next
+
+        print(p.data)
+        return p.data
+
+    # count the number of time the node appars
+    def count_occurance(self, number):
+        cur_node = self.head
+
+        while cur_node:
+            if cur_node.data == number:
+                print("find")
+                # return "Find"
+            else:
+                print("not find")
+
+            cur_node = cur_node.next
+
+
+l = LinkedList()
+l.append("A")
+l.append("B")
+l.append("C")
+l.append("D")
+# l.append("E")
+# l.append("F")
+# l.append("5")
 # l.append("6")
+# l.append("7")
 # l.add_in_between("2","3")
 # print list
+
+# l.nth_last_node_last(3)
+# l.nth_last_node_twoPointer(3)
+print(l.count_occurance("D"))
 
 # l.print_list()
 
