@@ -154,6 +154,47 @@ class Linkedlist {
     this.head = prev_node;
   }
 
+  // node swap (swap two nodes data elements)
+  nodeSwap(data1, data2) {
+    var curr1 = this.head;
+    var prev1;
+
+    while (curr1 && curr1.data != data1) {
+      prev1 = curr1;
+      curr1 = curr1.next;
+    }
+
+    var curr2 = this.head;
+    var prev2;
+
+    while (curr2 && curr2.data != data2) {
+      prev2 = curr2;
+      curr2 = curr2.next;
+    }
+
+    [curr1.data, curr2.data] = [curr2.data, curr1.data];
+  }
+
+  // remove duplicate
+  removeDuplicate() {
+    var cur_node = this.head;
+    var prev_node = null;
+
+    var dup_values = {};
+
+    while (cur_node) {
+      if (cur_node.data in dup_values) {
+        prev_node.next = cur_node.next;
+        cur_node = null;
+      } else {
+        dup_values[cur_node.data] = 1;
+        prev_node = cur_node;
+      }
+    }
+
+    cur_node = prev_node.next;
+  }
+
   //   print the linked list
   print() {
     var cur_node = this.head;
@@ -165,24 +206,27 @@ class Linkedlist {
 }
 
 var llist1 = new Linkedlist();
-llist1.append("1");
-llist1.append("3");
-llist1.append("5");
-llist1.append("7");
-llist1.append("9");
-llist1.append("10");
+llist1.append("A");
+llist1.append("B");
+llist1.append("B");
+llist1.append("C");
+llist1.append("D");
+llist1.append("E");
+llist1.append("F");
 
-var llist2 = new Linkedlist();
-llist2.append("2");
-llist2.append("4");
-llist2.append("6");
-llist2.append("8");
+// var llist2 = new Linkedlist();
+// llist2.append("2");
+// llist2.append("4");
+// llist2.append("6");
+// llist2.append("8");
 
 // llist1.merge_to_list(llist2);
 
 // llist.add_at_given("5", "4");
 // llist.delete_data("2");
-llist1.reverse();
-llist1.print();
+// llist1.reverse();
+// llist1.nodeSwap("E", "F");
 // llist1.findMiddle();
 // llist1.sumAndLength();
+llist1.removeDuplicate();
+llist1.print();
