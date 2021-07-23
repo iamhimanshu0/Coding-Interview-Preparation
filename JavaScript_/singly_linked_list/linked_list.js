@@ -205,25 +205,6 @@ class Linkedlist {
     return count;
   }
 
-  deleteNLastNode(n) {
-    var cur_node = this.head;
-    var prev_node = null;
-
-    var l = this.findLength();
-    var counter = 0;
-
-    while (cur_node) {
-      counter += 1;
-      if (counter == l - n) {
-        prev_node = cur_node.next;
-        // console.log(cur_node.data);
-        cur_node = null;
-      }
-      prev_node = cur_node;
-      // cur_node = cur_node.next;
-    }
-  }
-
   //   print the linked list
   print() {
     var cur_node = this.head;
