@@ -71,7 +71,7 @@ class LinkedList:
 
         if count % 2 == 0:
             # two even node then /2 +1
-            mid = math.ceil(count/2)
+            mid = math.ceil(count / 2)
             print("Length is even ", mid)
             c = 0
             while self.head and c != mid:
@@ -82,7 +82,7 @@ class LinkedList:
             print("even")
         else:
             # else celing
-            mid = count//2
+            mid = count // 2
             print("Length is Odd ", mid)
             c = 0
             while self.head and c != mid:
@@ -118,16 +118,16 @@ class LinkedList:
 
     def reverse_list(self):
         """
-        / Before changing next of current, 
-        // store next node 
+        / Before changing next of current,
+        // store next node
         next = curr->next
-        // Now change next of current 
-        // This is where actual reversing happens 
-        curr->next = prev 
-        // Move prev and curr one step forward 
-        prev = curr 
+        // Now change next of current
+        // This is where actual reversing happens
+        curr->next = prev
+        // Move prev and curr one step forward
+        prev = curr
         curr = next
-     """
+        """
 
         prev_node = None
         cur_node = self.head
@@ -144,7 +144,7 @@ class LinkedList:
 
     def recursive_reverse(self, head):
         """
-        1) Divide the list in two parts - first node and 
+        1) Divide the list in two parts - first node and
         rest of the linked list.
         2) Call reverse for the rest of the linked list.
         3) Link rest to first.
@@ -277,15 +277,25 @@ class LinkedList:
             if k == number:
                 print(f"Occurance of {k} is {v} times")
 
+    def is_palindrome(self):
+        cur_node = self.head
+
+        s = ""
+        while cur_node:
+            s += cur_node.data
+            cur_node = cur_node.next
+
+        return s == s[::-1]
+
 
 l = LinkedList()
+# l.append("R")
+# l.append("A")
+# l.append("R")
 l.append("A")
-l.append("B")
-l.append("B")
 l.append("B")
 l.append("C")
-l.append("A")
-l.append("D")
+
 # l.append("E")
 # l.append("F")
 # l.append("5")
@@ -296,7 +306,7 @@ l.append("D")
 
 # l.nth_last_node_last(3)
 # l.nth_last_node_twoPointer(3)
-l.count_occurance("B")
+# l.count_occurance("B")
 
 # l.print_list()
 
@@ -320,3 +330,4 @@ l.count_occurance("B")
 # print("****")
 # l.remove_duplicate()
 # l.print_list()
+print(l.is_palindrome())
