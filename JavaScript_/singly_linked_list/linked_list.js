@@ -177,22 +177,51 @@ class Linkedlist {
 
   // remove duplicate
   removeDuplicate() {
+    var count = {};
+
     var cur_node = this.head;
     var prev_node = null;
 
-    var dup_values = {};
-
     while (cur_node) {
-      if (cur_node.data in dup_values) {
+      if (cur_node.data in count) {
         prev_node.next = cur_node.next;
-        cur_node = null;
       } else {
-        dup_values[cur_node.data] = 1;
+        count[cur_node.data] = 1;
         prev_node = cur_node;
       }
+      cur_node = cur_node.next;
+    }
+  }
+
+  findLength() {
+    var cur_node = this.head;
+    var count = 0;
+
+    while (cur_node) {
+      count += 1;
+      cur_node = cur_node.next;
     }
 
-    cur_node = prev_node.next;
+    return count;
+  }
+
+  deleteNLastNode(n) {
+    var cur_node = this.head;
+    var prev_node = null;
+
+    var l = this.findLength();
+    var counter = 0;
+
+    while (cur_node) {
+      counter += 1;
+      if (counter == l - n) {
+        prev_node = cur_node.next;
+        // console.log(cur_node.data);
+        cur_node = null;
+      }
+      prev_node = cur_node;
+      // cur_node = cur_node.next;
+    }
   }
 
   //   print the linked list
@@ -208,11 +237,9 @@ class Linkedlist {
 var llist1 = new Linkedlist();
 llist1.append("A");
 llist1.append("B");
-llist1.append("B");
 llist1.append("C");
 llist1.append("D");
 llist1.append("E");
-llist1.append("F");
 
 // var llist2 = new Linkedlist();
 // llist2.append("2");
@@ -228,5 +255,7 @@ llist1.append("F");
 // llist1.nodeSwap("E", "F");
 // llist1.findMiddle();
 // llist1.sumAndLength();
-llist1.removeDuplicate();
+// llist1.removeDuplicate();
+
+llist1.deleteNLastNode(2);
 llist1.print();
