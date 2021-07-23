@@ -205,6 +205,63 @@ class Linkedlist {
     return count;
   }
 
+  // method 1
+  printNLastNode(pos) {
+    var len = this.findLength();
+
+    var cur = this.head;
+
+    while (cur) {
+      if (len == pos) {
+        console.log(cur.data);
+      }
+      len -= 1;
+      cur = cur.next;
+    }
+    if (cur == null) {
+      return;
+    }
+  }
+
+  // method 2
+  printNLastNode_second(pos) {
+    var p = this.head;
+    var q = this.head;
+    var prev_node = null;
+
+    var counter = 0;
+    while (counter != pos) {
+      counter += 1;
+      q = q.next;
+    }
+
+    while (q) {
+      q = q.next;
+      p = p.next;
+    }
+    console.log(p.data);
+  }
+
+  // delete node from last n pos
+  deleteNLastNode(pos) {
+    var p = this.head;
+    var q = this.head;
+    var prev_node = null;
+
+    var counter = 0;
+    while (counter != pos) {
+      counter += 1;
+      q = q.next;
+    }
+
+    while (q) {
+      prev_node = p;
+      q = q.next;
+      p = p.next;
+    }
+    prev_node.next = p.next;
+  }
+
   //   print the linked list
   print() {
     var cur_node = this.head;
@@ -238,5 +295,7 @@ llist1.append("E");
 // llist1.sumAndLength();
 // llist1.removeDuplicate();
 
+// llist1.printNLastNode(2);
+// llist1.printNLastNode_second(2);
 llist1.deleteNLastNode(2);
 llist1.print();
