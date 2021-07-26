@@ -1,5 +1,4 @@
 import math
-from typing import Dict
 
 
 class Node:
@@ -277,15 +276,111 @@ class LinkedList:
             if k == number:
                 print(f"Occurance of {k} is {v} times")
 
+    # /*
+    # Create new linked list from two given linked list with greater element at each node
+    # */
+
+    def create_greater(self, list2):
+        p = self.head
+        q = list2.head
+        g = None
+
+        if p.data < q.data:
+            g = q
+        else:
+            g = p
+
+        while p and q:
+            if p.data < q.data:
+                g = q
+                # print(g.data)
+                q = q.next
+                p = p.next
+            else:
+                g = p
+                # print(g.data)
+                p = p.next
+                q = q.next
+
+    # Rotate a linked list in given element
+    def rotate(self, k):
+        p = self.head
+        q = self.head
+
+        prev = None
+        count = 0
+
+        while p and count < k:
+            prev = p
+            p = p.next
+            q = q.next
+            count += 1
+        p = prev
+
+        while q:
+            prev = q
+            q = q.next
+        q = prev
+
+        q.next = self.head
+        self.head = p.next
+        p.next = None
+
+    # Move tail to head node
+    def move_tail_to_head(self):
+        cur_node = self.head
+        prev_node = None
+        last_node = None
+
+        while cur_node.next:
+            prev_node = cur_node
+
+            last_node = cur_node.next
+            cur_node = cur_node.next
+
+        # print(prev_node.data)
+        prev_node.next = None
+        last_node.next = self.head
+        self.head = last_node
+
+    # sum of two linked list elements
+    def sum_of_two(self, list2):
+        p = self.head
+        q = list2.head
+        result = 0
+        while p and q:
+            result += p.data + q.data
+            p = p.next
+            q = q.next
+
+        print(result)
+
 
 l = LinkedList()
-l.append("A")
-l.append("B")
-l.append("B")
-l.append("B")
-l.append("C")
-l.append("A")
-l.append("D")
+l.append(5)
+l.append(6)
+l.append(5)
+
+l2 = LinkedList()
+l2.append(8)
+l2.append(4)
+l2.append(2)
+
+# l.move_tail_to_head()
+
+# l.rotate(4)
+l.sum_of_two(l2)
+# l.print_list()
+
+# l2 = LinkedList()
+# l2.append("5")
+# l2.append("7")
+# l2.append("6")
+# l2.append("2")
+
+# l.create_greater(l2)
+# l.print_list()
+
 # l.append("E")
 # l.append("F")
 # l.append("5")
@@ -296,7 +391,7 @@ l.append("D")
 
 # l.nth_last_node_last(3)
 # l.nth_last_node_twoPointer(3)
-l.count_occurance("B")
+# l.count_occurance("B")
 
 # l.print_list()
 
