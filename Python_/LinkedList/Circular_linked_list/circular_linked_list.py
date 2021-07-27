@@ -1,3 +1,6 @@
+from typing import NewType
+
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -26,6 +29,14 @@ class CircularLinkedList:
         cur = self.head
         new_node.next = self.head
 
+        if self.head == None:
+            new_node.next = new_node
+        else:
+            while cur.next != self.head:
+                cur = cur.next
+            cur.next = new_node
+        self.head = new_node
+
     def print_list(self):
         cur = self.head
 
@@ -41,5 +52,6 @@ c.append(1)
 c.append(2)
 c.append(3)
 c.append(4)
+c.prepend(22)
 
 c.print_list()
