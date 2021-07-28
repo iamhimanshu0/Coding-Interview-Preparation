@@ -56,6 +56,19 @@ class CircularLinkedList:
                     prev_node.next = cur_node.next
                     cur_node = cur_node.next
 
+    def find_length(self):
+        cur_node = self.head
+        count = 0
+
+        while cur_node:
+            count += 1
+            cur_node = cur_node.next
+            if cur_node == self.head:
+                break
+
+        print(f"Length is {count}")
+        return count
+
     def print_list(self):
         cur = self.head
 
@@ -65,17 +78,66 @@ class CircularLinkedList:
             if cur == self.head:
                 break
 
+    def find_middle(self):
+        slow_pointer = self.head
+        fast_pointer = self.head.next.next
+
+        while fast_pointer and fast_pointer.next:
+            slow_pointer = slow_pointer.next
+            fast_pointer = fast_pointer.next
+
+            if fast_pointer.next == self.head:
+                break
+        # print(f"Middle element is {slow_pointer.data}")
+        return slow_pointer.data
+
+    def split_list(self):
+        middle = self.find_middle()
+        cur_node = self.head
+        prev_node = None
+
+        split_start = None
+
+        while cur_node.data != middle:
+            prev_node = cur_node
+            cur_node = cur_node.next
+
+        #
+        split_start = cur_node.next
+        # point to itself
+        cur_node.next = self.head
+
+        # split cllist
+        split_cllist = CircularLinkedList()
+        while split_start.next != self.head:
+            split_cllist.append(split_start.data)
+            split_start = split_start.next
+
+        split_cllist.append(split_start.data)
+
+        self.print_list()
+
+        print("")
+
+        split_cllist.print_list()
+
 
 c = CircularLinkedList()
 c.append(1)
 c.append(2)
 c.append(3)
 c.append(4)
+c.append(5)
+# c.append(6)
+
 
 # c.remove(1)
 # c.remove(3)
-c.remove(4)
-c.remove(8)
+# c.remove(4)
+# c.remove(8)
 
 # c.remove(1)
-c.print_list()
+# c.find_length()
+# c.find_middle()
+c.split_list()
+# c.print_list()
