@@ -66,7 +66,7 @@ class CircularLinkedList:
             if cur_node == self.head:
                 break
 
-        print(f"Length is {count}")
+        # print(f"Length is {count}")
         return count
 
     def print_list(self):
@@ -121,16 +121,53 @@ class CircularLinkedList:
 
         split_cllist.print_list()
 
+    def remove_node(self, node):
+
+        # if key == head node
+        if self.head == node:
+            cur = self.head
+            while cur.next != self.head:
+                cur = cur.next
+
+            cur.next = self.head.next
+            self.head = self.head.next
+        else:
+            cur_node = self.head
+            prev_node = None
+            # not equal to head node
+            while cur_node.next != self.head:
+                prev_node = cur_node
+                cur_node = cur_node.next
+                if cur_node == node:
+                    prev_node.next = cur_node.next
+                    cur_node = cur_node.next
+
+    def josephus_circle(self, step):
+        cur = self.head
+
+        while self.find_length() >1:
+            count = 1
+            while count != step:
+                cur = cur.next 
+                count +=1
+            print(f"Removed {cur.data}")
+            self.remove_node(cur)
+            cur = cur.next
+
 
 c = CircularLinkedList()
 c.append(1)
 c.append(2)
 c.append(3)
 c.append(4)
-c.append(5)
+# c.append(5)
 # c.append(6)
 
+c.josephus_circle(2)
 
+
+# c.remove_node(c.head)
+c.print_list()
 # c.remove(1)
 # c.remove(3)
 # c.remove(4)
@@ -139,5 +176,5 @@ c.append(5)
 # c.remove(1)
 # c.find_length()
 # c.find_middle()
-c.split_list()
+# c.split_list()
 # c.print_list()
