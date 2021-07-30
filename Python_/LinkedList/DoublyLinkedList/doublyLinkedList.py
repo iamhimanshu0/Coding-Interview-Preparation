@@ -11,14 +11,13 @@ class DoublyLinkedList:
 
     def append(self, data):
 
-        if self.head == None:
+        if not self.head:
             new_node = Node(data)
             self.head = new_node
             new_node.next = None
             new_node.prev = self.head
         else:
             cur_node = self.head
-            prev_node = None
             new_node = Node(data)
 
             while cur_node.next:
@@ -49,7 +48,7 @@ class DoublyLinkedList:
             cur_node = cur_node.next
 
         # ask as to add the data in last position (but there is no next)
-        if cur_node.next == None:
+        if not cur_node.next:
             cur_node.next = new_node
             new_node.prev = cur_node
             new_node.next = None
@@ -60,6 +59,30 @@ class DoublyLinkedList:
             cur_node.next.prev = new_node
             new_node.prev = cur_node
             cur_node.next = new_node
+
+    def remove(self, data):
+        # if want to remove head node
+        if not self.head.data:
+            cur_node = self.head
+            self.head = cur_node.next
+            cur_node.next.prev = self.head
+            cur_node = None
+        else:
+            cur_node = self.head
+            prev_node = None
+            while cur_node.data != data:
+                prev_node = cur_node
+                cur_node = cur_node.next
+
+            # if last node is empty
+            if not cur_node.next:
+                prev_node.next = None
+                cur_node = None
+            else:
+                prev_node.next = cur_node.next
+                cur_node.next.prev = prev_node
+
+                cur_node = None
 
     def print_list(self):
         cur_node = self.head
@@ -74,5 +97,7 @@ d.append(2)
 d.append(3)
 d.append(4)
 d.prepend(0)
-d.add_at_given_node(4, 20)
+# d.add_at_given_node(4,20)
+d.remove(0)
+d.remove(4)
 d.print_list()
