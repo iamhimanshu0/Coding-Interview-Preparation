@@ -5,6 +5,31 @@ class Node:
         self.next = None
 
 
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def print_list(self):
+        cur_node = self.head
+
+        while cur_node:
+            print(cur_node.data)
+            cur_node = cur_node.next
+
+    def append(self, data):
+        new_node = Node(data)
+
+        if self.head == None:
+            self.head = new_node
+            return
+
+        cur_node = self.head
+        while cur_node.next:
+            cur_node = cur_node.next
+
+        cur_node.next = new_node
+
+
 class CircularLinkedList:
     def __init__(self):
         self.head = None
@@ -145,14 +170,22 @@ class CircularLinkedList:
     def josephus_circle(self, step):
         cur = self.head
 
-        while self.find_length() >1:
+        while self.find_length() > 1:
             count = 1
             while count != step:
-                cur = cur.next 
-                count +=1
+                cur = cur.next
+                count += 1
             print(f"Removed {cur.data}")
             self.remove_node(cur)
             cur = cur.next
+
+    def is_circular_linked_list(self, input_list):
+        cur = input_list.head
+        while cur.next:
+            cur = cur.next
+            if cur.next == input_list.head:
+                return True
+        return False
 
 
 c = CircularLinkedList()
@@ -160,14 +193,23 @@ c.append(1)
 c.append(2)
 c.append(3)
 c.append(4)
+
+s = LinkedList()
+s.append(1)
+s.append(2)
+s.append(3)
+s.append(4)
+
+# s.print_list()
 # c.append(5)
 # c.append(6)
-
-c.josephus_circle(2)
+print(c.is_circular_linked_list(s))
+print(c.is_circular_linked_list(c))
+# c.josephus_circle(2)
 
 
 # c.remove_node(c.head)
-c.print_list()
+# c.print_list()
 # c.remove(1)
 # c.remove(3)
 # c.remove(4)
