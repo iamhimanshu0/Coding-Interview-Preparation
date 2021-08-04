@@ -62,6 +62,10 @@ class DoublyLinkedList:
             cur_node.next = new_node
 
     def remove(self, data):
+        # if there is only one element in the list
+        if self.head.data == data and self.head.next == None:
+            self.head = None
+            return
         # if want to remove head node
         if self.head.data == data:
             cur_node = self.head
@@ -85,6 +89,41 @@ class DoublyLinkedList:
 
                 cur_node = None
 
+    def reverse(self):
+        temp = None
+        cur_node = self.head
+
+        while cur_node:
+            temp = cur_node.prev
+            cur_node.prev = cur_node.next
+            cur_node.next = temp
+            cur_node = cur_node.prev
+
+        if temp:
+            self.head = temp.prev
+
+    def remove_duplicates(self):
+        dup = {}
+
+        cur_node = self.head
+        prev_node = None
+        while cur_node:
+            prev_node = cur_node
+
+            if cur_node.data not in dup:
+                dup[cur_node.data] = 1
+            else:
+                prev_node.next = cur_node.next
+                cur_node.next.prev = prev_node
+                cur_node = None
+                # duplicate occur
+
+                # dup[cur_node.data] += 1
+
+            cur_node = cur_node.next
+
+        print(dup)
+
     def print_list(self):
         cur_node = self.head
         while cur_node:
@@ -95,11 +134,14 @@ class DoublyLinkedList:
 d = DoublyLinkedList()
 d.append(1)
 d.append(2)
+d.append(2)
 d.append(3)
 d.append(4)
 d.prepend(0)
 # d.add_at_given_node(4,20)
-d.remove(0)
-d.remove(1)
-d.remove(4)
+# d.remove(0)
+# d.remove(1)
+# d.remove(4)
+# d.reverse()
+d.remove_duplicates()
 d.print_list()
