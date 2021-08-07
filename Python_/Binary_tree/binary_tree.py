@@ -1,8 +1,9 @@
 class Node(object):
     def __init__(self, value):
-        self.value = value 
+        self.value = value
         self.left = None
-        self.right = None 
+        self.right = None
+
 
 class BinaryTree(object):
     def __init__(self, root):
@@ -23,7 +24,7 @@ class BinaryTree(object):
 
         if start:
             # root
-            traversal += (str(start.value) + "->")
+            traversal += str(start.value) + "->"
             # left
             traversal = self.preorder_print(start.left, traversal)
             # right
@@ -36,10 +37,9 @@ class BinaryTree(object):
 
         if start:
             # left
-            traversal = self.inorder_print(start.left
-            , traversal)
+            traversal = self.inorder_print(start.left, traversal)
             # root
-            traversal += (str(start.value) + "->")
+            traversal += str(start.value) + "->"
             # right
             traversal = self.inorder_print(start.right, traversal)
 
@@ -50,16 +50,13 @@ class BinaryTree(object):
 
         if start:
             # left
-            traversal = self.postorder_print(start.left
-            , traversal)            
+            traversal = self.postorder_print(start.left, traversal)
             # right
             traversal = self.postorder_print(start.right, traversal)
             # root
-            traversal += (str(start.value) + "->")
+            traversal += str(start.value) + "->"
 
         return traversal
-
-
 
 
 #              1
@@ -71,8 +68,6 @@ class BinaryTree(object):
 # pre order -> 1->2->4->5->3->6->7
 # in order -> 4->2->5->1->6->3->7
 # post order -> 4->5->2->6->7->1
-
- 
 
 
 # setup a tree
