@@ -58,6 +58,24 @@ class LinkedList:
             # print("Length of the LinkedList is:- ", count)
 
         return count
+    
+    def deleteAlt(self):
+
+        if self.head == None:
+            return
+
+        prev = self.head 
+        nxt = prev.next 
+
+        while prev and nxt:
+
+            prev.next = nxt.next
+            nxt = None 
+
+            prev = prev.next
+
+            if prev != None:
+                nxt = prev.next 
 
     # find_middle element of a LinkedList
 
