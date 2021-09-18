@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func simpleDecleration() {
 	var a [3]int //int arrary with length 3
@@ -128,6 +130,78 @@ func modifySlice() {
 	fmt.Println("Create array with all element", darr[:])
 }
 
+// length and capacity of a slice
+
+/*
+The length of the slice is the number of elements in the slice.
+The capacity of the slice is the number of elements in the
+underlying array starting from the index from which the slice
+is created.
+*/
+
+func lengthCapicty() {
+	a := [...]string{"apple", "orange", "grapes", "mango", "pine apple", "chikoo"}
+	aSlice := a[1:3]
+	fmt.Printf("length of slice %d capacity %d\n", len(aSlice), cap(aSlice)) //length of is 2 and capacity is 5
+
+	aSlice = aSlice[:cap(aSlice)] //re-slicing furitslice till its capacity
+	fmt.Println("After re-slicing length is", len(aSlice), "and capacity is", cap(aSlice))
+
+}
+
+// creating a slice using make
+/*
+func make([]T, len, cap) []T can be used to create a slice by passing the type,
+length and capacity. The capacity parameter is optional
+defaults to the length. The make function creates an array and
+returns a slice reference to it.
+*/
+func makeSlice() {
+	i := make([]int, 5, 5)
+	fmt.Println(i)
+}
+
+// appending to a slice
+/*
+As we already know arrays are restricted to fixed length and their length
+cannot be increased. Slices are dynamic and new elements
+can be appended to the slice using append function.
+The definition of append function is func append(s []T, x ...T) []T.
+
+x ...T in the function definition means that the function accepts
+variable number of arguments for the parameter x.
+These type of functions are called variadic functions.
+*/
+func appendingToSlice() {
+	cars := []string{"Ferrari", "Audi", "Ford"}
+	fmt.Println("cars:", cars, "has old length", len(cars), "and capacity", cap(cars)) //capacity of cars is 3
+	cars = append(cars, "Toyota")
+	fmt.Println("cars:", cars, "has new length", len(cars), "and capacity", cap(cars)) //capacity of cars is doubled to 6
+}
+
+// It is also possible to append one slice to another using the ... operator.
+func slicesAppend() {
+	programming := []string{"Python", "JavaScript", "C++", "GoLang"}
+	uniqueness := []string{"Very good", "epic", "Fast", "Awesome"}
+
+	quality := append(programming, uniqueness...)
+	fmt.Println("Quality", quality)
+}
+
+// passing a slice to a function
+func addOne(numbers []int) {
+	for i := range numbers {
+		numbers[i] += 1
+	}
+}
+
+func passingSlice() {
+	nos := []int{8, 9, 10}
+	fmt.Println("Slice before function call ", nos)
+	addOne(nos)
+	fmt.Println("slice after function call ", nos)
+}
+
 func main() {
 	// simpleDecleration()
 	// ignoringLength()
@@ -137,5 +211,11 @@ func main() {
 	// intertingArrayBest()
 	// multidimensionalArray()
 	// slicesArray()
-	modifySlice()
+	// modifySlice()
+	// lengthCapicty()
+	// makeSlice()
+	// appendingToSlice()
+	// slicesAppend()
+	passingSlice()
+
 }
