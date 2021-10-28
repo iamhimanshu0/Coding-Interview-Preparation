@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -24,6 +27,35 @@ class BinaryTree:
     def treeNodeAddition(self, root):
         return sum(self.depthFirstSearch(root))
 
+    def recurrsiveNodeAddition(self, root):
+        if root == None:
+            return 0
+        else:
+            return root.value + self.recurrsiveNodeAddition(root.left) + self.recurrsiveNodeAddition(root.right)
+
+    # searching using BFS
+
+    def bfsSearch(self, root, target):
+        if not root:
+            return False
+
+        queue = deque([root])
+
+        while queue:
+            node = queue.popleft()
+
+            if node.val == target:
+                return True
+
+            if node.left:
+                queue.append(node.left)
+
+            if node.right:
+                queue.append(node.right)
+
+        return False
+
+    # Searching using DFS
     def treeSearchNode(self, root, node):
         isFind = 0
         stack = [root]
@@ -41,6 +73,53 @@ class BinaryTree:
             return False
         else:
             return True
+
+    def recursiveSearch(self, root, target):
+        if not root:
+            return False
+
+        if root.value == target:
+            return True
+
+        return self.recursiveSearch(root.left, target) or self.recursiveSearch(root.right, target)
+
+    def findMaximum(self, root):
+        if root == None:
+            return "No root found"
+        stack = [root]
+        result = []
+        while len(stack) > 0:
+            val = stack.pop()
+            result.append(val.value)
+
+            if val.left:
+                stack.append(val.left)
+            if val.right:
+                stack.append(val.right)
+
+        return max(result)
+
+    def recurrsiveFindMaximun(self, root):
+        if root is None:
+            return 0
+
+        value = root.value
+        left = self.recurrsiveFindMaximun(root.left)
+        right = self.recurrsiveFindMaximun(root.right)
+
+        if left > value:
+            value = left
+        if right > value:
+            value = right
+
+        return value
+
+    def printLeftSide(self, root):
+        if root is None:
+            return
+
+        print(root.value)
+        return self.printLeftSide(root.left)
 
 
 a = Node(1)
@@ -60,12 +139,16 @@ c.right = f
 #    /  \
 #    2  5
 #  /  \  \
-#  3  4   6
+#  4  3   6
 
 # print(BinaryTree().depthFirstSearch(a))
 # print(BinaryTree().treeNodeAddition(a))
+# print(BinaryTree().recurrsiveNodeAddition(a))
 # print(BinaryTree().treeSearchNode(a, 2))
 # print(BinaryTree().treeSearchNode(a, 5))
 # print(BinaryTree().treeSearchNode(a, 6))
 # print(BinaryTree().treeSearchNode(a, 1))
-# print(BinaryTree().treeSearchNode(a, 10))
+# print(BinaryTree().recursiveSearch(a, 10))
+# print(BinaryTree().findMaximum(a))
+# print(BinaryTree().recurrsiveFindMaximun(a))
+print(BinaryTree().printLeftSide(a))
