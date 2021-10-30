@@ -49,6 +49,35 @@ class BinaryTree:
 
         return result
 
+    def DepthFirstSearchRecurssive(self, root):
+        if not root:
+            return []
+
+        left = self.DepthFirstSearch(root.left)
+        right = self.DepthFirstSearch(root.right)
+
+        return [root.value, *left, *right]
+
+    # level order traversal
+    def BreathFirstSearch(self, root):
+        if not root:
+            return []
+
+        result = []
+        queue = [root]
+
+        while len(queue) > 0:
+            current = queue.pop(0)
+
+            result.append(current.value)
+
+            if current.left:
+                queue.append(current.left)
+            if current.right:
+                queue.append(current.right)
+
+        return result
+
 
 root = Node(1)
 root.left = Node(2)
@@ -70,4 +99,6 @@ root.right.right = Node(7)
 # print(BinaryTree().PreOrder(root))
 # print(BinaryTree().PostOrder(root))
 # print(BinaryTree().InOrder(root))
-print(BinaryTree().DepthFirstSearch(root))
+# print(BinaryTree().DepthFirstSearch(root))
+# print(BinaryTree().DepthFirstSearchRecurssive(root))
+print(BinaryTree().BreathFirstSearch(root))
