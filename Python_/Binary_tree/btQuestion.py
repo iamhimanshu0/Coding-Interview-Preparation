@@ -136,7 +136,7 @@ class BinaryTree:
 
     def heightOfTreeRecurssive(self, root):
         if not root:
-            return -1
+            return 0
 
         dleft = self.heightOfTreeRecurssive(root.left)
         dright = self.heightOfTreeRecurssive(root.right)
