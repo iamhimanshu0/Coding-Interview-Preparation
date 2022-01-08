@@ -9,7 +9,12 @@ Output: []
 
 Input: head = [1,2], n = 1
 Output: [1]
+
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 """
+
+from typing import Counter, Deque
+
 
 class Node:
     def __init__(self, value):
@@ -42,31 +47,18 @@ class LinkedList:
             cur_node = cur_node.next 
 
     
-    def removeNnode(self, value):
-        length = 0
-        count = 0 
-        cur_node = self.head 
-
-        while cur_node:
-            length = length +1
-            cur_node = cur_node.next 
-
-        node = self.head
-        prev = None
-
-
-        while count < (length- value) and node.next:
-            prev = node
-            node = node.next 
-            count = count +1
-
-
-        print(prev.value,node.next.value)
-
-
-        
-
-    
+    def removeNnode(self, n):
+        fast = slow = self.head
+        for _ in range(n):
+            fast = fast.next 
+            
+        if not fast:
+            return self.head.next
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next
+        return self.head
 
 
 llist = LinkedList()
@@ -75,5 +67,7 @@ llist.append(2)
 llist.append(3)
 llist.append(4)
 llist.append(5)
-llist.removeNnode(2)
-# llist.printList()
+llist.removeNnode(1)
+
+llist.printList()
+
