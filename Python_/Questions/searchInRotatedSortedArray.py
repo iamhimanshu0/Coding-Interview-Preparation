@@ -18,11 +18,11 @@ Output: -1
 Input: nums = [1], target = 0
 Output: -1
 """
-nums = [4,5,6,7,0,1,2]
-target = 5
+nums = [1]
+target = 1
 
 def search(nums, target):
-    l, r = 0, len(nums)-1
+    l, r = 0, len(nums)
 
     while l < r:
         mid = (l+r)//2
