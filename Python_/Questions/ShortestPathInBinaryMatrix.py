@@ -41,7 +41,6 @@ def shortestPathBinaryMatrix(grid):
     print(q)
     while q:
         steps, tmp = q.popleft()
-        print(steps, tmp)
         r,c = tmp[0],tmp[1]
 
         if (r,c) == (ROW-1, COL-1):
