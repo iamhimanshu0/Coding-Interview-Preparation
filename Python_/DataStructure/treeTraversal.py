@@ -33,13 +33,26 @@ def inorderTraversal(node):
     if not node:
         return []
     s = []
-    
+
     s += preorderTraversal(root.left)
     s = [root.value]    
     s += preorderTraversal(root.right)
 
     return s
 
+
+def postorderTraversal(node):
+    if not node:
+        return []
+    s = []
+
+
+    s += preorderTraversal(root.left)
+    s += preorderTraversal(root.right)
+    s += [root.value]    
+    
+
+    return s
 
 
 root = Node(1)
