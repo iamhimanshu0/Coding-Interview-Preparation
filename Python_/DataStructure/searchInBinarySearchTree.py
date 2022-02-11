@@ -41,7 +41,13 @@ def searchBST(root, val):
 
     return res
             
-        
+
+def searchBST2(root, val):
+    if root and val < root.val:
+        return searchBST2(root.left, val)
+    elif root and val > root.val:
+        return searchBST2(root.right, val)
+    return root   
     # return res
 
 # if we need to return all the subtree nodes then use this 
@@ -67,5 +73,5 @@ root.left.left = TreeNode(1)
 root.left.right = TreeNode(3)
 
 print(
-    searchBST(root, 3)
+    searchBST2(root, 2)
 )
