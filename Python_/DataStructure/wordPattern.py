@@ -16,7 +16,7 @@ pattern = "abba";s = "dog cat cat dog"
 
 def wordPattern(pattern, s):
     words, w_to_p = s.split(" "), dict()
-    print(words, w_to_p)
+    # print(words, w_to_p)
 
     if len(pattern) != len(words):
         return False
@@ -30,7 +30,7 @@ def wordPattern(pattern, s):
         elif w_to_p[words[i]] != pattern[i]:
             return False
 
-    print(w_to_p)
+    # print(w_to_p)
     return True
     
 
