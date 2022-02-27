@@ -1,4 +1,4 @@
 # Coding-Interview-Preparation 
-- Important DSA topics
+- Important Data Struture Question for coding interviews
 - Practice Questions
 - Brief explanation
