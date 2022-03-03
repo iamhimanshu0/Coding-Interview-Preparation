@@ -20,6 +20,8 @@ n = 5; edges = [[0,1],[2,1],[3,1],[1,4],[2,4]]
 # n = 3
 # edges = [[0,1],[2,0],[2,1]]
 
+
+# Time limit exceed
 def findSmallestSetOfVertices(n, edges):
     
     graph = {}
@@ -47,9 +49,18 @@ def findSmallestSetOfVertices(n, edges):
             result.append(count[i])
 
     return result
-    
+
+# running solution
+def findSmallestSetOfVertices2(n, edges):
+    ans = set(range(n))
+    # print(ans)
+    for e in edges:
+        # print(e)
+        if e[1] in ans:
+            ans.remove(e[1])
+    return list(ans)  
     
 
 print(
-    findSmallestSetOfVertices(n, edges)
+    findSmallestSetOfVertices2(n, edges)
 )
