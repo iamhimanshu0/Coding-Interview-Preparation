@@ -51,14 +51,42 @@ def isSameTree(p,q):
     return bfs(p) == bfs(q)
 
     
+def isSameTree2(p,q):
+    if not p and not q: return True
+        
+    stack =  [[p,q]]
+    result = []
+
+    while stack:
+        pValue, qValue = stack.pop(0)
+        
+        if not pValue or not qValue:
+            return False
+
+        if pValue.val == qValue.val:
+            result.append(True)
+        else:
+            result.append(False)
+        
+        if pValue.left or qValue.left:
+            stack.append([pValue.left, qValue.left])
+        # else:
+        #     return False
+        
+        if pValue.right or qValue.right:
+            stack.append([pValue.right, qValue.right])
+        # else:
+        #     return False
+    # print(result)
+    return all(result)
 
 
 p = TreeNode(1)
 p.left = TreeNode(2)
-# p.right = TreeNode(3)
+p.right = TreeNode(3)
 
 q = TreeNode(1)
-# q.left = TreeNode(2)
-q.right = TreeNode(2)
+q.left = TreeNode(2)
+q.right = TreeNode(3)
 
-print(isSameTree(p,q))
+print(isSameTree2(p,q))
