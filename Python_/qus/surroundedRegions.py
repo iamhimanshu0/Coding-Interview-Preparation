@@ -26,14 +26,39 @@ board = [["X","X","X","X"],
          ["X","O","X","X"]]
 
 def solve(board):
-    if not board: return 
+    
+    if not board: return []
+
     row, col = len(board), len(board[0])
 
-    for i in range(0,row-1):
-        for j in range(col):
-            board[i][j] = "#"
+    def dfs(i,j):
+        if i<0 or i>= row or j<0 or j>= col or board[i][j] != 'O':
+            return 
+        board[i][j] = "T"
 
+        dfs(i,j+1)
+        dfs(i,j-1)
+        dfs(i-1,j)
+        dfs(i+1,j)
+
+    for r in range(row):
+        for c in range(col):
+            if board[r][c] == "O" and r in [0, row-1] or c in [0, col-1]:
+                dfs(r,c)
+
+    # change O to X
+    for r in range(row):
+        for c in range(col):
+            if board[r][c] == "O":
+                board[r][c] = "X"
+    
+    # change T to O
+    for r in range(row):
+        for c in range(col):
+            if board[r][c] == "T":
+                board[r][c] = "O"
     return board
+
 
 
 print(
