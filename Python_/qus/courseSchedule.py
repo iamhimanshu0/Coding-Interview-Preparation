@@ -88,8 +88,54 @@ def canFinish2(numCourses, prerequisites):
             return False
     return True
 
+
+def canFinish3(numCourses, prerequisites):
+
+    # build list
+    def buildAdjacencyList(n, edgesList):
+        adjList = [[] for _ in range(n)]
+
+        for c1, c2 in edgesList:
+            adjList[c2].append(c1)
+
+        return adjList
+
+    adjList = buildAdjacencyList(numCourses, prerequisites)
     
+    # Each vertex can have 3 different states:
+    # state 0   : vertex is not visited. It's a default state.
+    # state -1  : vertex is being processed. Either all of its descendants
+    #             are not processed or it's still in the function call stack.
+    # state 1   : vertex and all its descendants are processed.
+
+    state = [0]* numCourses
+
+    def hasCycle(v):
+        if state[v] == 1:
+            # this vetex is processed so we pass.
+            return False
+        
+        if state[v] == -1:
+            # being process and it means we have cycle
+            return True
+
+        # set state to -1
+        state[v] = -1
+
+        for i in adjList[v]:
+            if hasCycle(i):
+                return True
+        
+        state[v] = 1
+        return False
+
+    for v in range(numCourses):
+        if hasCycle(v):
+            return False
+    return True
+       
+
 
 print(
-    canFinish2(numCourses, prerequisites)
+    canFinish3(numCourses, prerequisites)
 )
