@@ -61,8 +61,10 @@ def wallGates(grid):
             new_x = dx+x
             new_y = dy+y            
 
-            if new_x < 0 or new_x >= row or new_y <0 or new_y >= col or grid[new_x][new_y] < grid[x][y]+1 or (new_x, new_y) in visited:
+            if new_x < 0 or new_x >= row or new_y <0 or new_y >= col or\
+               grid[new_x][new_y] < grid[x][y]+1 or (new_x, new_y) in visited:
                 continue
+            
             visited.add((new_x, new_y))
             grid[new_x][new_y] = grid[x][y] +1
             queue.append((new_x, new_y))
