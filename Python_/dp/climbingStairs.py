@@ -18,12 +18,14 @@ Explanation: There are three ways to climb to the top.
 
 https://www.geeksforgeeks.org/count-ways-reach-nth-stair/
 """
-n = 3
-
-def fib(n):
+n = 5
+def fib(n, memo = {}):
+    if n in memo:
+        return memo[n]
     if n <=1:
         return n
-    return fib(n-1) + fib(n-2)
+    memo[n] = fib(n-1, memo) + fib(n-2, memo)
+    return memo[n]
 
 def climb_stairs(n):
     return fib(n+1)
