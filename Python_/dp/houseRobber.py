@@ -17,15 +17,20 @@ Total amount you can rob = 2 + 9 + 1 = 12.
 nums = [2,7,9,3,1]
 
 
-def dp(nums):
-    return dp(nums, len(nums)-1)
-
 def rob(nums):
-    if 
-    return max(dp(0, nums), dp(1, nums))
+    if len(nums) == 0: return 0
+    length = len(nums)+1
+    memo = [0]*length
 
+    memo[0] = 0
+    memo[1] = nums[0]
 
+    for i in range(len(nums)):
+        val = nums[i]
+        memo[i+1] = max(memo[i], memo[i-1]+val)
+    
+    return memo[-1]
 
 print(
-    dp(0, nums)
+    rob(nums)
 )
