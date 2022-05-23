@@ -40,9 +40,8 @@ def memoRob(nums):
     
     return rob(0)
 
-
 def rob(nums):
-    if len(nums) == 0: return 0
+    if len(nums) == 0: return nums[0]
     length = len(nums)+1
     memo = [0]*length
 
