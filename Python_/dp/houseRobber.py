@@ -17,6 +17,30 @@ Total amount you can rob = 2 + 9 + 1 = 12.
 nums = [2,7,9,3,1]
 
 
+# TC :- O(2^N)  := N is the number of elements in rob, in each index we have 2 choice, rob or not rob
+# SC :- O(N) :- required by implicit recursive stack. the max depth of recursion can go up to N
+
+def bruteForce(rob,i=0):
+    return max(bruteForce(rob,i+1), rob[i]+bruteForce(rob,i+2)) if i < len(rob) else 0
+
+
+# TC:- O(N) , we only calculate the result for each index once and there are N indexes
+# SC:- O(N), required for dp and implicit recursive stack
+
+def memoRob(nums):
+
+    def rob(i, memo={}):
+        if i in memo: return memo[i]
+
+        if i < len(nums):
+            memo[i] = max(rob(i+1), nums[i]+rob(i+2))
+        else:
+            memo[i] = 0
+        return memo[i]
+    
+    return rob(0)
+
+
 def rob(nums):
     if len(nums) == 0: return 0
     length = len(nums)+1
@@ -32,5 +56,5 @@ def rob(nums):
     return memo[-1]
 
 print(
-    rob(nums)
+    memoRob(nums)
 )
