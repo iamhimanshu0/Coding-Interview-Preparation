@@ -7,6 +7,18 @@ You can resue elements of 'wordBank' as many time as needed.
 
 */
 
+// Brute force
+//               | = target.slice()
+// TC => O(n^m * m)
+// SC => O(m   * m)
+
+// memo
+// m = target.length, n = wordBank.length
+
+//               | = target.slice()
+// TC => O(n*m * m)
+// SC => O(m   * m)
+
 const countConstruct = (target, wordBank, memo = {}) => {
   if (target === "") return 1;
   if (target in memo) return memo[target];
