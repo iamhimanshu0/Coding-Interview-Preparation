@@ -25,3 +25,5 @@ console.log(allConstruct("hello", ["cat", "dog", "mouse"]));
 console.log(
   allConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd", "ef", "c"])
 );
+
+// this is just a simple comment
