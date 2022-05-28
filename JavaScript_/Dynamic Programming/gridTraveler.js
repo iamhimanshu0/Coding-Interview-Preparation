@@ -23,3 +23,14 @@ const grid = (m, n) => {
 };
 
 console.log(grid(3, 2));
+console.log(grid(30, 20));
+
+// Tabulation Recipe
+/*
+  - visualize the problem as a table
+  - size the table based on the inputs
+  - initalize the table with default values
+  - seed the trivial answer into the table
+  - iterate through the table
+  - fill further positions based on the      current position
+*/
