@@ -15,11 +15,11 @@ Note that you are allowed to reuse a dictionary word.
 Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
 Output: false
 """
-# s = "leetcode"
-# wordDict = ["leet","code"]
+s = "leetcode"
+wordDict = ["leet","code"]
 
-s = "catsandog"
-wordDict = ["cats","dog","and","cat"]
+# s = "catsandog"
+# wordDict = ["cats","dog","and","cat"]
 
 def wordBreak(s, wordDict, memo={}):
 
@@ -36,4 +36,30 @@ def wordBreak(s, wordDict, memo={}):
 
     memo[s] = False     
     return memo[s]
-print(wordBreak(s, wordDict))
+
+def wordBreakDP(s, wordDict):
+    table = [False for _ in range(len(s)+1)]
+    table[0] = True
+    
+    for i in range(1,len(s)):
+        if table[i] == True:
+            for word in wordDict:
+                if s[i:i+len(word)] == word:
+                    table[i+len(word)] == True
+    # print(table)
+    return table[-1]
+
+def leetCode(s, wordDict):
+    n = len(s)
+    dp = [False for _ in range(n+1)]
+    dp[0] = True
+
+    for i in range(1, n+1):
+        for w in wordDict:
+            if dp[i-len(w)] and s[i-len(w):i]==w:
+                dp[i]=True
+    return dp[-1]
+            
+
+
+print(leetCode(s, wordDict))
