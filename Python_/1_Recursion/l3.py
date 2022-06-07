@@ -62,5 +62,22 @@ print(
     print_all_subsequences([3,1,2])
 )
 
+def subsets(self, nums: List[int]) -> List[List[int]]:
+        output = []
+        def printF(idx, n, array, nums,output):
+            if idx == n:
+                output.append(array[:])
+                return
+            
+            array.append(nums[idx])
+            printF(idx+1,n,array,nums,output)
+            array.pop()
+            
+            printF(idx+1, n,array,nums,output)
+            
+        printF(0,len(nums),[],nums,output)
+        print(output)
+        return output
+
 # TC :-> o(2^n * n)
 # Sc :-> 0(n)  ;- n length of array
