@@ -37,9 +37,12 @@ def sum_is_k_one(nums, k):
     output = []
     def find(idx, arr):
         if idx == len(nums):
+            # condition is satisfied
             if sum(arr) == k:
                 output.append(arr[:])
                 return True
+                
+            # condition is not satisfied
             return False
 
         arr.append(nums[idx])
@@ -51,7 +54,7 @@ def sum_is_k_one(nums, k):
 
         if(find(idx+1, arr) == True):
             return True
-            
+
         return False
 
     find(0, [])
