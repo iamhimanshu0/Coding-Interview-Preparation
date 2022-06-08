@@ -60,7 +60,28 @@ def sum_is_k_one(nums, k):
     find(0, [])
     return output
 
+def sum_of_k_count(nums,k):
+    # cnt = 0
+    output = []
+    def count(idx, arr):
+        if idx == len(nums):
+            if sum(arr) == k:
+                output.append(arr[:])
+            return
+
+        arr.append(nums[idx])
+        count(idx+1, arr)
+        arr.pop()
+
+        count(idx+1, arr)  
+
+    count(0,[])      
+    return output
+        
 print(
-    sum_is_k_one([17, 18, 6, 11, 2, 4],6),
-    sum_is_k_one([1,2,3,4],6)
+    # sum_is_k_one([17, 18, 6, 11, 2, 4],6),
+    sum_is_k([1,2,3,4],6),
+
+    # sum_of_k_count([17, 18, 6, 11, 2, 4],6),
+    sum_of_k_count([1,2,3,4],6)
 )
