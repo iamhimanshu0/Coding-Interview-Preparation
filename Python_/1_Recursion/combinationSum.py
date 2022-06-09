@@ -39,11 +39,11 @@ def combinationSum(candidates, target):
 
 def combinationSum2(candidates, target):
     output = []
-    
+
     def find(idx,target, ds):
         if idx == len(candidates):
             if target == 0:
-                output.append(ds[:])
+                output.append(ds[:].sorted())
             return 
 
         if candidates[idx] <= target:
@@ -59,6 +59,6 @@ def combinationSum2(candidates, target):
     return output
 
 print(
-    combinationSum2([2,3,4,6],7),
-    # combinationSum([2,3,5,2,2,2],8)
+    # combinationSum2([2,3,4,6],7),
+    combinationSum([10,1,2,7,6,1,5],8)
 )
