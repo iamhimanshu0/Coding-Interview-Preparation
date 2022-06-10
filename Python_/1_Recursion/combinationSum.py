@@ -24,8 +24,8 @@ def combinationSum(candidates, target):
     output = []
     def find(idx, arr):
         if idx == len(candidates):
-            if sum(arr) == target:
-                output.append(arr[:])
+            if sum(arr) == target and sorted(arr) not in output:
+                output.append(sorted(arr[:]))
             return
     
         arr.append(candidates[idx])
@@ -42,8 +42,8 @@ def combinationSum2(candidates, target):
 
     def find(idx,target, ds):
         if idx == len(candidates):
-            if target == 0:
-                output.append(ds[:].sorted())
+            if target == 0:                
+                output.append(sorted(ds[:]))
             return 
 
         if candidates[idx] <= target:
@@ -58,7 +58,29 @@ def combinationSum2(candidates, target):
 
     return output
 
+def combinationSumWorking(candidates, target):
+    output = []
+    sorted(candidates)
+
+    def find(idx, target, output, arr):
+        if target == 0:
+            output.append(arr[:])
+            return
+        
+        for i in range(len(candidates)):
+            if i > idx and candidates[i] == candidates[i-1]: continue
+            if candidates[i] > target: break
+
+            arr.append(candidates[i])
+            find(i+1,target-candidates[i], output, arr)
+            arr.pop()
+
+    find(0, target, output, [])
+    return output
+
+
+
 print(
-    # combinationSum2([2,3,4,6],7),
-    combinationSum([10,1,2,7,6,1,5],8)
+    combinationSumWorking([2,3,4,6],7),
+    # combinationSumWorking([10,1,2,7,6,1,5],8)
 )
