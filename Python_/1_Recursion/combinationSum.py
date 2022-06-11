@@ -60,14 +60,14 @@ def combinationSum2(candidates, target):
 
 def combinationSumWorking(candidates, target):
     output = []
-    sorted(candidates)
+    candidates.sort()
 
     def find(idx, target, output, arr):
         if target == 0:
             output.append(arr[:])
             return
         
-        for i in range(len(candidates)):
+        for i in range(idx,len(candidates)):
             if i > idx and candidates[i] == candidates[i-1]: continue
             if candidates[i] > target: break
 
@@ -81,6 +81,6 @@ def combinationSumWorking(candidates, target):
 
 
 print(
-    combinationSumWorking([2,3,4,6],7),
-    # combinationSumWorking([10,1,2,7,6,1,5],8)
+    # combinationSumWorking([2,3,4,6],7),
+    combinationSumWorking([10,1,2,7,6,1,5],8)
 )
