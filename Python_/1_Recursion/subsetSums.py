@@ -27,6 +27,26 @@ def subsetSum(values):
     find(0,[],0)
     return sorted(output)
 
+def subset_two(candidates):
+    output = []
+    candidates.sort()
+
+    def find(idx, output, arr):
+        if idx == 0:
+            output.append(arr[:])
+            return
+        
+        for i in range(idx,len(candidates)):
+            if i > idx and candidates[i] == candidates[i-1]: continue           
+
+            arr.append(candidates[i])
+            find(i+1, output, arr)
+            arr.pop()
+
+    find(0,  output, [])
+    return output
+
+
 print(
-    subsetSum([3,1,2])
+    subset_two([1,1,3])
 )
