@@ -53,28 +53,38 @@ def subset_two(candidates):
     where ‘N’ is the number of elements in ‘ARR’.    
 """
 
-def rec(st :int,cur :List[int],arr :List[int],subsets:List[List[int]]):
+def subSettwo(nums):
+    output =  []
+    nums.sort()
 
-    subsets.append(cur[:])
+    def find(nums, idx, arr):
+        output.append(arr[:])
+        for i in range(idx, len(nums)):
+            if i != idx and nums[i] == nums[i-1]:
+                continue
+            arr.append(nums[idx])
+            find(nums, idx+1, arr)
+            arr.pop()
 
-    for i in range(st,len(arr)):
+    find(nums, 0,[])
+    return output
+
+def subsetsWithDup(nums):
+    result=[]
+    nums.sort()#To handle duplicate first we sort the array ( adjacent elements will be similar )
+    def backtrack(nums,index=0,arr=[]):
+        result.append( arr.copy() )
+        for i in range( index, len(nums)):
+            if i != index and nums[i] ==nums[i-1]: #skip the duplicates, except for the first time
+                continue
+            arr.append(nums[i]) #include the element
+            backtrack(nums,i+1,arr ) #explore
+            arr.pop() #remove the element
         
-        if i==st or arr[i] != arr[i-1]:
-
-            cur.append(arr[i])
-            rec(i+1,cur,arr,subsets)
-            cur.pop()
-
-def uniqueSubsets(n :int,arr :List[int]) -> List[List[int]]:
-    
-    subsets = []
-    arr = sorted(arr)
-    cur = []
-    rec(0,cur,arr,subsets)
-
-    return subsets
-
+    backtrack(nums)
+    return result
 
 print(
-    subset_two([1,1,3])
+    subsetsWithDup([1,1,3]),
+    subSettwo([1,1,3])
 )
