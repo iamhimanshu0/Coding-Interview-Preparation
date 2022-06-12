@@ -31,8 +31,8 @@ def subset_two(candidates):
     output = []
     candidates.sort()
 
-    def find(idx, output, arr):
-        if idx == 0:
+    def find(idx,arr):
+        if idx == len(candidates):
             output.append(arr[:])
             return
         
@@ -40,11 +40,39 @@ def subset_two(candidates):
             if i > idx and candidates[i] == candidates[i-1]: continue           
 
             arr.append(candidates[i])
-            find(i+1, output, arr)
+            find(i+1, arr)
             arr.pop()
 
-    find(0,  output, [])
+    find(0,[])
     return output
+
+"""
+    Time Complexity: O(2^N)
+    Space Complexity: O(2^N)
+
+    where ‘N’ is the number of elements in ‘ARR’.    
+"""
+
+def rec(st :int,cur :List[int],arr :List[int],subsets:List[List[int]]):
+
+    subsets.append(cur[:])
+
+    for i in range(st,len(arr)):
+        
+        if i==st or arr[i] != arr[i-1]:
+
+            cur.append(arr[i])
+            rec(i+1,cur,arr,subsets)
+            cur.pop()
+
+def uniqueSubsets(n :int,arr :List[int]) -> List[List[int]]:
+    
+    subsets = []
+    arr = sorted(arr)
+    cur = []
+    rec(0,cur,arr,subsets)
+
+    return subsets
 
 
 print(
