@@ -57,13 +57,13 @@ def subSettwo(nums):
     output =  []
     nums.sort()
 
-    def find(nums, idx, arr):
+    def find(nums, idx, arr=[]):
         output.append(arr[:])
         for i in range(idx, len(nums)):
             if i != idx and nums[i] == nums[i-1]:
                 continue
-            arr.append(nums[idx])
-            find(nums, idx+1, arr)
+            arr.append(nums[i])
+            find(nums, i+1, arr)
             arr.pop()
 
     find(nums, 0,[])
