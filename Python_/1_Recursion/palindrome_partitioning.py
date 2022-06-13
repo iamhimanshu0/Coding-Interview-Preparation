@@ -13,19 +13,22 @@ Output: [["a"]]
 def partition(s):
     output = []
 
-    def find(idx, arr, s):
-        if idx == len(s):
+    def isPalindrome(st):
+        return st == st[::-1]
+
+    def find(idx, arr):
+        if idx == len(s)+1:
             output.append(arr[:])
             return
 
-        for i in range(idx, len(s)):
-            if s[:i]== s[:i][::-1]:
-                arr.append(s[:i])
-                find(i+1, arr, s)
+        for i in range(idx, len(s)+1):
+            if isPalindrome(s[idx-1:i]):
+                arr.append(s[idx-1:i])
+                find(i+1, arr)
                 arr.pop()
        
     
-    find(0,[], s)
+    find(1,[])
     return output
 
 def partition_2(s):
@@ -43,6 +46,6 @@ def partition_2(s):
     return res
 
 print(
-    partition_2("aab")
+    partition("aab")
     # partition("aabb")
 )
