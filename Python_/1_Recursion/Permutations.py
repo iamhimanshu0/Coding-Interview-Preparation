@@ -30,29 +30,45 @@ def printInt(s):
     find(0, freq, [])
     return output
 
- 
+# TC :- n! * n  :- n! beacuse need to find all the permutations and n is for looping though
+
+# SC :- O(n)
 def printInt2(s):
-    pass
+    # output = []
 
-def printString(s):
-    output = []
-
-    def find(idx,arr):
+    def find(idx, arr):
         if idx == len(s):
-            output.append(arr[:])
-            return
-        
-        for i in range(idx, len(s)):
-            arr.append(s[i])
-            find(i+1, arr)
-            arr.pop()
-        
-
-
+            print(arr)
+        else:
+            for i in range(idx, len(s)):
+                s[idx], s[i] = s[i], s[idx]
+                # arr.append(s[i])
+                find(idx+1, arr)
+                s[idx], s[i] = s[i], s[idx]
+                # arr.pop()
+    
     find(0,[])
-    return output
+    # return output
+
+def permuteString(s):
+    
+    def find(a, l, r):
+        if l == r:
+            print("".join(a))
+        else:
+            for i in range(l,r):
+                a[l], a[i] = a[i], a[l]
+                find(a, l+1, r)
+                a[l], a[i] = a[i], a[l]
+
+    find(s,0, len(s))
+
+
+
+
     
 print(
-    # printString("abc")
-    printInt([1,2,3])
+#     printString(["a","b","c"])
+    printInt([1,2,3]),
+# permuteString(list("ABC"))
 )
