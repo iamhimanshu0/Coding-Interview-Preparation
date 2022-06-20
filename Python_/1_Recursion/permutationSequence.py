@@ -66,6 +66,28 @@ def subSettwo(nums):
         backtrack(i,[])
     return output
         
+def permuatation(nums):
+    output = []
+    
+    def backtrack(idx, hashmap,arr):
+        if idx == len(nums):
+            output.append(arr[:])
+            return
+        
+        for i in range(idx, len(nums)):
+            if nums[i] not in hashmap:
+                arr.append(nums[i])
+                hashmap[i] = True
+                backtrack(idx+1, hashmap, arr)
+                arr.pop()
+                hashmap[i] = False
+        
+    freq = [False]*len(nums)
+    backtrack(0, freq, [])
+    return output
+
+
 print(
-    subSettwo([1,2,3])
+    # subSettwo([1,2,3])
+    permuatation([1,2,3])
 )
