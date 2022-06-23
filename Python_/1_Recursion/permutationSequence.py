@@ -66,31 +66,30 @@ def subSettwo(nums):
         backtrack(i,[])
     return output
         
-def permuatation(nums):
-    output = []
 
-    def backtrack(idx, arr, hash):
-        if idx == len(nums):
-            output.append(arr[:])
-            # return
+def permuatation(value):
+    def backtrack(a,k=0):
+        if k == len(a):
+            print(a)
         else:
-            for i in range(idx, len(nums)):
-                # arr.append(nums[i])
-                # hash[i] = True
-                nums[idx], nums[i] = nums[i], nums[idx]
-                backtrack(idx+1, arr, hash)
-                # hash[i] = False
-                # arr.pop()
-                nums[idx], nums[i] = nums[idx], nums[i]
+            for i in range(k, len(a)):
+                a[k], a[i] = a[i], a[k]
+                backtrack(a, k+1)
+                a[k], a[i] = a[i], a[k]
 
+    backtrack(value)
 
-    freq = [False]*len(nums)
-    backtrack(0, [], freq)
-    return output
-
-
+def permuatation2(value):
+    perms = [[]]
+    for n in value:
+        new_parms = []
+        for perms in perms:
+            for i in range(len(perms) +1):
+                new_parms.append(perms[:i] + [n] +perms[i:])
+        perms = new_parms
+    return perms
 
 print(
     # subSettwo([1,2,3])
-    permuatation([1,2,3])
+    permuatation2(list("abc"))
 )
