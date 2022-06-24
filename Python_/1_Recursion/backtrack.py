@@ -25,7 +25,6 @@ class Backtrack:
         output = []
 
         def backtrack(idx, arr, target):
-            # if idx == len(candidates):
             if target == 0:
                 output.append(arr[:])
                 return
@@ -43,7 +42,46 @@ class Backtrack:
         backtrack(0,[], target)
         return output
 
+
+    def subset(self, nums):
+        output = []
+
+        def backtrack(idx, arr):
+            # if idx == len(nums):
+            output.append(arr[:])
+                # return
+            
+            for i in range(idx, len(nums)):
+                arr.append(nums[i])
+                backtrack(i+1, arr)
+                arr.pop()
+
+                
+            # arr.append(nums[idx])
+            # backtrack(idx+1, arr)
+            # arr.pop()
+
+            # backtrack(idx+1, arr)
+        
+        backtrack(0,[])
+        return output
+
+    def subsets_With_Dup(self, nums):
+        def backtrack(start, end, tmp):
+            ans.append(tmp[:])
+            for i in range(start, end):
+                if i > start and nums[i] == nums[i-1]:
+                    continue
+                tmp.append(nums[i])
+                backtrack(i+1, end, tmp)
+                tmp.pop()
+        ans = []
+        nums.sort()
+        backtrack(0, len(nums), [])
+        return ans
+
 b = Backtrack()
 print(
-    b.combination_sum_2([10,1,2,7,6,1,5],8)
+    # b.combination_sum_2([10,1,2,7,6,1,5],8)
+    b.subset([1,2,3])
 )
