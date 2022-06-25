@@ -42,7 +42,6 @@ class Backtrack:
         backtrack(0,[], target)
         return output
 
-
     def subset(self, nums):
         output = []
 
@@ -80,8 +79,42 @@ class Backtrack:
         backtrack(0, len(nums), [])
         return ans
 
+    def permutations(self, nums):
+        output = []
+
+        def backtrack(idx):
+            if idx == len(nums):
+                output.append(nums[:])            
+                return
+
+            for i in range(idx, len(nums)):
+                nums[idx], nums[i] = nums[i], nums[idx]
+                backtrack(idx+1)
+                nums[idx], nums[i] = nums[i], nums[idx]
+
+        backtrack(0)
+        return output
+
+    def permutations_unique(self, nums):
+        output = []
+
+        def backtrack(idx):
+            if idx == len(nums) and nums[:] not in output:
+                output.append(nums[:])
+                return
+            
+            for i in range(idx, len(nums)):
+                nums[idx], nums[i] = nums[i], nums[idx]
+                backtrack(idx+1)
+                nums[idx], nums[i] = nums[i], nums[idx]
+
+        backtrack(0)
+        return output
+
+
 b = Backtrack()
+
 print(
     # b.combination_sum_2([10,1,2,7,6,1,5],8)
-    b.subset([1,2,3])
+    b.permutations_unique([1,1,2])
 )
