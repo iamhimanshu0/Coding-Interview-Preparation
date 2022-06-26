@@ -1,4 +1,7 @@
 
+from itertools import permutations
+
+
 class Backtrack:
 
     # Combination sum
@@ -99,22 +102,46 @@ class Backtrack:
         output = []
 
         def backtrack(idx):
-            if idx == len(nums) and nums[:] not in output:
+            if idx == len(nums):
                 output.append(nums[:])
                 return
             
+            lookup = set()
+
             for i in range(idx, len(nums)):
-                nums[idx], nums[i] = nums[i], nums[idx]
-                backtrack(idx+1)
-                nums[idx], nums[i] = nums[i], nums[idx]
+                if nums[i] not in lookup:
+                    nums[idx], nums[i] = nums[i], nums[idx]
+                    backtrack(idx+1)
+                    nums[idx], nums[i] = nums[i], nums[idx]
+                    lookup.add(nums[i])
 
         backtrack(0)
         return output
 
+    def pallindrome_partitioning(self, s):
+        output = []
+
+        def isPallindrome(st):
+            return st == st[::-1]
+
+        def backtrack(idx, arr):
+            if idx == len(s)+1:
+                output.append(arr[:])
+                return          
+
+            for i in range(idx, len(s)+1):
+                if isPallindrome(s[idx-1:i]):
+                    arr.append(s[idx-1:i])
+                    backtrack(i+1, arr)
+                    arr.pop()
+                
+        backtrack(1, [])
+        return output
 
 b = Backtrack()
 
 print(
     # b.combination_sum_2([10,1,2,7,6,1,5],8)
-    b.permutations_unique([1,1,2])
+    b.pallindrome_partitioning(list("aab"))
+    # b.permutations()
 )
