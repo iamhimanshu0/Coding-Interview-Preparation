@@ -1,7 +1,3 @@
-
-from itertools import permutations
-
-
 class Backtrack:
 
     # Combination sum
@@ -138,10 +134,77 @@ class Backtrack:
         backtrack(1, [])
         return output
 
+    def next_permutation(self, nums):
+        i = j = len(nums)-1
+
+        # check to see if giving number is increasing or not
+        while i >0 and nums[i-1] >= nums[i]:
+            i-=1
+        
+        if i == 0: # numbers are in descending order
+            nums.reverse()
+            return nums
+        
+        k = i-1 # find the last "ascending" position
+        print(k)
+
+        while nums[j] <= nums[k]:
+            j-=1
+        # print(j,k)
+        nums[k], nums[j] = nums[j], nums[k]
+
+        l, r = k+1, len(nums)-1 # reverse the second part
+
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l+=1
+            r-=1
+
+        return nums        
+
+    def n_queens(self, n):
+
+        col = set()
+
+        posDig = set() 
+
+        negDig = set()
+
+        board = [["."]*n for _ in range(n)]
+        res = []
+
+        def backtrack(r):
+            if r == n:
+                copy = ["".join(row) for row in board]
+                res.append(copy)
+                return
+
+            for c in range(n):
+                if c in col or (r+c) in posDig or (r-c) in negDig:
+                    continue
+                
+                col.add(c)
+                posDig.add(r+c)
+                negDig.add(r-c)
+                board[r][c] = "Q"
+
+                backtrack(r+1)
+
+                col.remove(c)
+                posDig.remove(r+c)
+                negDig.remove(r-c)
+                board[r][c] = "."
+
+        backtrack(0)
+        return res
+                
+    
 b = Backtrack()
 
 print(
     # b.combination_sum_2([10,1,2,7,6,1,5],8)
-    b.pallindrome_partitioning(list("aab"))
+    # b.pallindrome_partitioning(list("aab"))
     # b.permutations()
+    # b.next_permutation([1,2,3])
+    b.n_queens(4)
 )
