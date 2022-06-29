@@ -198,7 +198,34 @@ class Backtrack:
         backtrack(0)
         return res
                 
-    
+    def letter_combinations_of_phone_number(self, digits):
+        
+        buttons = {
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz"
+        }
+        res = []
+
+        def backtrack(idx, curStr):
+            if len(curStr) == len(digits):
+                res.append(curStr)
+                return
+
+            for c in buttons[digits[idx]]:
+                backtrack(idx+1, curStr+c)
+
+        if digits:
+            backtrack(0, "")
+
+        return res
+
+
 b = Backtrack()
 
 print(
@@ -206,5 +233,6 @@ print(
     # b.pallindrome_partitioning(list("aab"))
     # b.permutations()
     # b.next_permutation([1,2,3])
-    b.n_queens(4)
+    # b.n_queens(4)
+    b.letter_combinations_of_phone_number("234")
 )
