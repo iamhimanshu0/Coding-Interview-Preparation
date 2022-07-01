@@ -4,20 +4,20 @@ class Backtrack:
     def combination_sum(self, candidates, target):
         output = []
 
-        def backtrack(idx,arr, target):
+        def backtrack(idx, arr, target):
             if idx == len(candidates):
                 if target == 0:
                     output.append(arr[:])
                 return
-                
+
             if candidates[idx] <= target:
                 arr.append(candidates[idx])
-                backtrack(idx, arr, target- candidates[idx])
+                backtrack(idx, arr, target - candidates[idx])
                 arr.pop()
 
             backtrack(idx+1, arr, target)
 
-        backtrack(0,[], target)
+        backtrack(0, [], target)
         return output
 
     def combination_sum_2(self, candidates, target):
@@ -27,18 +27,20 @@ class Backtrack:
             if target == 0:
                 output.append(arr[:])
                 return
-            
-            for i in range(idx, len(candidates)):
-                if i > idx and candidates[i] == candidates[i-1]: continue
 
-                if candidates[i] > target: break
+            for i in range(idx, len(candidates)):
+                if i > idx and candidates[i] == candidates[i-1]:
+                    continue
+
+                if candidates[i] > target:
+                    break
 
                 arr.append(candidates[i])
                 backtrack(i+1, arr, target - candidates[i])
                 arr.pop()
-        
+
         candidates.sort()
-        backtrack(0,[], target)
+        backtrack(0, [], target)
         return output
 
     def subset(self, nums):
@@ -47,21 +49,20 @@ class Backtrack:
         def backtrack(idx, arr):
             # if idx == len(nums):
             output.append(arr[:])
-                # return
-            
+            # return
+
             for i in range(idx, len(nums)):
                 arr.append(nums[i])
                 backtrack(i+1, arr)
                 arr.pop()
 
-                
             # arr.append(nums[idx])
             # backtrack(idx+1, arr)
             # arr.pop()
 
             # backtrack(idx+1, arr)
-        
-        backtrack(0,[])
+
+        backtrack(0, [])
         return output
 
     def subsets_With_Dup(self, nums):
@@ -83,7 +84,7 @@ class Backtrack:
 
         def backtrack(idx):
             if idx == len(nums):
-                output.append(nums[:])            
+                output.append(nums[:])
                 return
 
             for i in range(idx, len(nums)):
@@ -101,7 +102,7 @@ class Backtrack:
             if idx == len(nums):
                 output.append(nums[:])
                 return
-            
+
             lookup = set()
 
             for i in range(idx, len(nums)):
@@ -123,14 +124,14 @@ class Backtrack:
         def backtrack(idx, arr):
             if idx == len(s)+1:
                 output.append(arr[:])
-                return          
+                return
 
             for i in range(idx, len(s)+1):
                 if isPallindrome(s[idx-1:i]):
                     arr.append(s[idx-1:i])
                     backtrack(i+1, arr)
                     arr.pop()
-                
+
         backtrack(1, [])
         return output
 
@@ -138,35 +139,35 @@ class Backtrack:
         i = j = len(nums)-1
 
         # check to see if giving number is increasing or not
-        while i >0 and nums[i-1] >= nums[i]:
-            i-=1
-        
-        if i == 0: # numbers are in descending order
+        while i > 0 and nums[i-1] >= nums[i]:
+            i -= 1
+
+        if i == 0:  # numbers are in descending order
             nums.reverse()
             return nums
-        
-        k = i-1 # find the last "ascending" position
+
+        k = i-1  # find the last "ascending" position
         print(k)
 
         while nums[j] <= nums[k]:
-            j-=1
+            j -= 1
         # print(j,k)
         nums[k], nums[j] = nums[j], nums[k]
 
-        l, r = k+1, len(nums)-1 # reverse the second part
+        l, r = k+1, len(nums)-1  # reverse the second part
 
         while l < r:
             nums[l], nums[r] = nums[r], nums[l]
-            l+=1
-            r-=1
+            l += 1
+            r -= 1
 
-        return nums        
+        return nums
 
     def n_queens(self, n):
 
         col = set()
 
-        posDig = set() 
+        posDig = set()
 
         negDig = set()
 
@@ -182,7 +183,7 @@ class Backtrack:
             for c in range(n):
                 if c in col or (r+c) in posDig or (r-c) in negDig:
                     continue
-                
+
                 col.add(c)
                 posDig.add(r+c)
                 negDig.add(r-c)
@@ -197,9 +198,9 @@ class Backtrack:
 
         backtrack(0)
         return res
-                
+
     def letter_combinations_of_phone_number(self, digits):
-        
+
         buttons = {
             "2": "abc",
             "3": "def",
@@ -233,6 +234,6 @@ print(
     # b.pallindrome_partitioning(list("aab"))
     # b.permutations()
     # b.next_permutation([1,2,3])
-    # b.n_queens(4)
+    b.n_queens(4)
     b.letter_combinations_of_phone_number("234")
 )
