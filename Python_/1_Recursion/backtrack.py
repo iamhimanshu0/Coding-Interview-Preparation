@@ -234,6 +234,6 @@ print(
     # b.pallindrome_partitioning(list("aab"))
     # b.permutations()
     # b.next_permutation([1,2,3])
-    b.n_queens(4)
+    b.n_queens(4),
     b.letter_combinations_of_phone_number("234")
 )
