@@ -45,10 +45,23 @@ class DynamicProgramming:
         # return find2(n, dp)
         return find3(n)
 
+    def climbing_stairs(self, n):
+
+        def find1(n, memo={}):
+            if n in memo:
+                return memo[n]
+            if n <= 1:
+                return n
+
+            memo[n] = find1(n-1, memo) + find1(n-2, memo)
+            return memo[n]
+
+        return find1(n+1)
+
 
 dp = DynamicProgramming()
 
 print(
-    dp.fibonacii(15)
-
+    # dp.fibonacii(15)
+    dp.climbing_stairs(3)
 )
