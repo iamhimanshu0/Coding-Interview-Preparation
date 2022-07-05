@@ -58,6 +58,23 @@ class DynamicProgramming:
 
         return find1(n+1)
 
+    def frog_jump(self, stones):
+        """
+        :type stones: List[int]
+        :rtype: bool
+        """
+        dic = collections.defaultdict(set)
+        dic[0].add(0)
+        for i in range(len(stones)):
+            if stones[i] in dic:
+                for val in dic[stones[i]]:
+                    if val > 0:
+                        dic[stones[i]+val].add(val)
+                    if val > 1:
+                        dic[stones[i]+val-1].add(val-1)
+                    dic[stones[i]+val+1].add(val+1)
+        return stones[-1] in dic
+
 
 dp = DynamicProgramming()
 
