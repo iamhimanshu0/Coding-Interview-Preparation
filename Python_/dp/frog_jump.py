@@ -31,14 +31,22 @@ def frogJump(heights):
     # return find(len(heights)-1)
 
     dp = [0 for _ in range(len(heights))]
+    dp[0] = 0
 
-    for i in range(len(heights)):
-        # dp[i] =
-        pass
+    for i in range(1, len(heights)):
+        ff = dp[i-1] + abs(heights[i-1] - heights[i])
+
+        ss = math.inf
+        if i > 1:
+            ss = dp[i-2] + abs(heights[i-2] - heights[i])
+
+        dp[i] = min(ff, ss)
+
+    return dp[-1]
 
 
 print(
-    # frogJump([10, 20, 30, 10]),
+    frogJump([10, 20, 30, 10]),
     frogJump([10, 50, 10]),
     frogJump([7, 4, 4, 2, 6, 6, 3, 4]),
     frogJump([4, 8, 3, 10, 4, 4]),
