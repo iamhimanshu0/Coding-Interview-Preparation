@@ -45,9 +45,31 @@ def frogJump(heights):
     return dp[-1]
 
 
+def frogJumpWithKSteps(heights, k):
+
+    def find(idx):
+        if idx == 0:
+            return 0
+
+        minCost = math.inf
+
+        for i in range(1, k):
+            if idx - i >= 0:
+                ff = find(idx-i) + abs(heights[idx]-heights[idx-i])
+
+            minCost = min(minCost, ff)
+
+        return minCost
+
+    return find(len(heights)-1)
+
+
 print(
-    frogJump([10, 20, 30, 10]),
-    frogJump([10, 50, 10]),
-    frogJump([7, 4, 4, 2, 6, 6, 3, 4]),
-    frogJump([4, 8, 3, 10, 4, 4]),
+    # frogJump([10, 20, 30, 10]),
+    # frogJump([10, 50, 10]),
+    # frogJump([7, 4, 4, 2, 6, 6, 3, 4]),
+    # frogJump([4, 8, 3, 10, 4, 4]),
+    frogJumpWithKSteps([10, 30, 40, 50, 20], 3),
+    frogJumpWithKSteps([10, 20, 10], 1),
+    frogJumpWithKSteps([30, 10, 60, 10, 60, 50], 2)
 )
