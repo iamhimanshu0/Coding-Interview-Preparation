@@ -7,17 +7,20 @@ You are given an array/list of ‘N’ integers. You are supposed to return the 
 
 def maximunNonAdjacentSums(nums):
 
-    def backtrack(idx):
+    def backtrack(idx, memo={}):
+        if nums[idx] in memo:
+            return memo[idx]
         if idx < 0:
             return 0
 
         if idx == 0:
             return nums[idx]
 
-        pick = backtrack(idx-2) + nums[idx]
-        notPick = backtrack(idx-1) + 0
+        pick = backtrack(idx-2, memo) + nums[idx]
+        notPick = backtrack(idx-1, memo) + 0
 
-        return max(pick, notPick)
+        memo[idx] = max(pick, notPick)
+        return memo[idx]
 
     return backtrack(len(nums)-1)
 
