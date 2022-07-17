@@ -10,7 +10,7 @@ def maximunNonAdjacentSums(nums):
     def backtrack(idx, memo={}):
         if nums[idx] in memo:
             return memo[idx]
-        if idx < 0:
+        elif idx < 0:
             return 0
 
         if idx == 0:
@@ -26,5 +26,6 @@ def maximunNonAdjacentSums(nums):
 
 
 print(
-    maximunNonAdjacentSums([1, 2, 4])
+    # maximunNonAdjacentSums([1, 2, 4]),
+    maximunNonAdjacentSums([1, 2, 4, 3])
 )
