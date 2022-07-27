@@ -8,13 +8,13 @@ You are given an array/list of ‘N’ integers. You are supposed to return the 
 def maximunNonAdjacentSums(nums):
 
     def backtrack(idx, memo={}):
-        if nums[idx] in memo:
+        if idx in memo:
             return memo[idx]
-        elif idx < 0:
-            return 0
 
         if idx == 0:
-            return nums[idx]
+            return idx
+        if idx < 0:
+            return 0
 
         pick = backtrack(idx-2, memo) + nums[idx]
         notPick = backtrack(idx-1, memo) + 0
@@ -22,10 +22,30 @@ def maximunNonAdjacentSums(nums):
         memo[idx] = max(pick, notPick)
         return memo[idx]
 
+    dp = [-1] * len(nums)
+
+    def solve_dp(idx):
+
+        if idx == 0:
+            return idx
+        if idx < 0:
+            return 0
+        if dp[idx] != -1:
+            return dp[idx]
+
+        pick = nums[idx] + solve_dp(idx-2)
+
+        notPick = 0 + solve_dp(idx-1)
+
+        dp[idx] = max(pick, notPick)
+
+        return dp[idx]
+
+    return solve_dp(len(nums)-1)
     return backtrack(len(nums)-1)
 
 
 print(
     # maximunNonAdjacentSums([1, 2, 4]),
-    maximunNonAdjacentSums([1, 2, 4, 3])
+    maximunNonAdjacentSums([2, 1, 4, 9])
 )
