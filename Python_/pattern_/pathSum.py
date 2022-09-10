@@ -48,6 +48,18 @@ def pathSum(root, targetSum):
     return False
 
 
+def recursive(root, targetSum):
+    if not root:
+        return False
+    elif not root.left and not root.right:
+        if root.val == targetSum:
+            return True
+        else:
+            return False
+
+    return recursive(root.left, targetSum - root.val) or recursive(root.right, targetSum - root.val)
+
+
 root = Node(5)
 root.left = Node(4)
 root.left.left = Node(11)
@@ -60,4 +72,4 @@ root.right.right = Node(4)
 root.right.right.right = Node(1)
 
 
-print(pathSum(root, 22))
+print(recursive(root, 22))
